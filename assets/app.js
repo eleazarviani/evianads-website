@@ -22,7 +22,7 @@ document.querySelectorAll('.faq-item').forEach((item) => {
 // The first submission ever sent to LEAD_EMAIL triggers a one-time
 // confirmation email from FormSubmit that must be clicked to activate
 // delivery — see SETUP.md.
-const LEAD_EMAIL = 'consulting@evianads.com';
+const LEAD_EMAIL = 'consult@evianads.com';
 
 const contactForm = document.getElementById('contact-form');
 if (contactForm) {
