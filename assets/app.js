@@ -24,12 +24,6 @@ document.querySelectorAll('.faq-item').forEach((item) => {
 // delivery — see SETUP.md.
 const LEAD_EMAIL = 'consult@evianads.com';
 
-// CCed on every submission so it also arrives as a text message, via the
-// carrier's email-to-SMS gateway (T-Mobile: <number>@tmomail.net). Like
-// LEAD_EMAIL, this address needs its own one-time FormSubmit activation
-// click on first use — see SETUP.md.
-const LEAD_SMS_GATEWAY = '8327637553@tmomail.net';
-
 const contactForm = document.getElementById('contact-form');
 if (contactForm) {
   const submitBtn = contactForm.querySelector('button[type="submit"]');
@@ -61,7 +55,6 @@ if (contactForm) {
           message: contactForm.elements.message.value.trim(),
           _subject: 'New lead — Evianads free audit request',
           _template: 'table',
-          _cc: LEAD_SMS_GATEWAY,
         }),
       });
 
