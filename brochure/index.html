@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>EVC Tennis Academy — Tri-Fold Brochure</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#EDEAE1;
+    --navy:#1E2A44;
+    --navy-soft:#2C3A57;
+    --gold:#AC8A57;
+    --rule:#1E2A44;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:#666;}
+  body{font-family:'Jost',sans-serif;color:var(--navy);}
+  .sheet{
+    width:11in;
+    height:8.5in;
+    background:var(--cream);
+    display:flex;
+    margin:20px auto;
+    box-shadow:0 0 12px rgba(0,0,0,.35);
+    position:relative;
+    overflow:hidden;
+  }
+  .panel{
+    width:3.66667in;
+    height:8.5in;
+    padding:0.45in 0.4in;
+    display:flex;
+    flex-direction:column;
+    position:relative;
+  }
+  .panel + .panel{ }
+  .rule{
+    border:none;
+    border-top:1.5px solid var(--rule);
+    margin:0.16in 0;
+  }
+  .rule.thin{border-top-width:1px;}
+  h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:600;margin:0;color:var(--navy);}
+  .headline{
+    font-size:30pt;
+    line-height:1.08;
+    font-weight:600;
+  }
+  .headline.small{font-size:24pt;}
+  .eyebrow{
+    font-family:'Cormorant Garamond',serif;
+    font-size:15pt;
+    letter-spacing:3px;
+    text-align:center;
+    color:var(--navy);
+  }
+  p{font-size:9.5pt;line-height:1.55;font-weight:300;margin:0;color:var(--navy-soft);}
+  .photo{width:100%;object-fit:cover;display:block;}
+  .caption-box{
+    border:1.4px solid var(--navy);
+    text-align:center;
+    padding:0.14in 0;
+    font-size:8.5pt;
+    letter-spacing:2px;
+    font-weight:500;
+  }
+  .center{text-align:center;}
+  .diamond-rule{
+    display:flex;align-items:center;gap:8px;margin:0.18in 0;
+  }
+  .diamond-rule::before,.diamond-rule::after{
+    content:"";flex:1;border-top:1px solid var(--navy-soft);opacity:.55;
+  }
+  .diamond-rule span{
+    width:6px;height:6px;background:var(--gold);transform:rotate(45deg);
+    display:inline-block;
+  }
+
+  /* ---------- PAGE 1 (FRONT) ---------- */
+  #page1 .panel1{
+    background:var(--cream);
+  }
+  #page1 .panel1 .photo-wrap{
+    border-top:1.5px solid var(--rule);
+    border-bottom:1.5px solid var(--rule);
+    padding:0.16in 0;
+  }
+  #page1 .panel1 .photo{height:3.55in;}
+  #page1 .panel1 h2{font-size:23pt;text-align:center;margin-top:0.22in;}
+  #page1 .panel1 .icon-graphic{width:100%;margin-top:0.14in;}
+
+  #page1 .panel2{justify-content:flex-start;}
+  #page1 .panel2 .top-rule{border-top:2px solid var(--rule);width:100%;margin-bottom:0.2in;}
+  #page1 .panel2 .body-copy{margin-top:0.18in;}
+  #page1 .panel2 .location-graphic{width:100%;}
+  #page1 .panel2 .bottom-rule{border-top:1.5px solid var(--rule);margin-top:0.16in;}
+  #page1 .panel2 .clinic-photo{margin-top:0.18in;height:1.85in;object-fit:cover;}
+
+  #page1 .panel3{align-items:stretch;}
+  #page1 .panel3 .brand-rule{display:flex;align-items:center;gap:0.12in;}
+  #page1 .panel3 .brand-rule hr{flex:1;height:0;margin:0;border:none;border-top:1.5px solid var(--rule);}
+  #page1 .panel3 .brand{font-size:15pt;letter-spacing:3px;white-space:nowrap;}
+  #page1 .panel3 .brand-photo-wrap{margin-top:0.2in;border-top:1.5px solid var(--rule);border-bottom:1.5px solid var(--rule);padding:0.16in 0;}
+  #page1 .panel3 .brand-photo{height:3.1in;}
+  #page1 .panel3 .headline{margin-top:0.24in;}
+  #page1 .panel3 p{margin-top:0.16in;}
+  #page1 .panel3 .spacer{flex:1;}
+  #page1 .panel3 .caption-box{margin-bottom:0.05in;}
+  #page1 .panel3 .bottom-rule{border-top:1.5px solid var(--rule);margin-top:0.18in;}
+
+  /* ---------- PAGE 2 (BACK) ---------- */
+  #page2 .panel1 .arch-photo{
+    width:100%;height:4.6in;object-fit:cover;
+    border-radius:0 0 999px 999px / 0 0 60% 60%;
+    clip-path: ellipse(60% 100% at 50% 0%) ;
+  }
+  #page2 .panel1 .arch-wrap{
+    border-radius: 50% 50% 0 0 / 30% 30% 0 0;
+    overflow:hidden;
+    height:4.4in;
+  }
+  #page2 .panel1 .arch-wrap img{width:100%;height:100%;object-fit:cover;}
+  #page2 .panel1 h2{font-size:19pt;margin-top:0.22in;line-height:1.15;}
+  #page2 .panel1 p{margin-top:0.14in;}
+  #page2 .panel1 .spacer{flex:1;}
+  #page2 .panel1 .bottom-rule{border-top:1.5px solid var(--rule);margin-top:0.16in;}
+
+  #page2 .panel2 .eyebrow-caps{
+    font-family:'Cormorant Garamond',serif;
+    font-size:20pt;letter-spacing:3px;font-weight:600;
+  }
+  #page2 .panel2 .top-rule{border-top:2px solid var(--rule);width:100%;margin:0.14in 0 0.3in;}
+  .program{display:flex;gap:0.14in;margin-bottom:0.28in;align-items:flex-start;}
+  .program .spark{font-size:14pt;color:var(--navy);margin-top:2px;}
+  .program h3{font-family:'Cormorant Garamond',serif;font-size:16pt;font-weight:600;margin-bottom:0.09in;}
+  .program ul{list-style:none;margin:0;padding:0;}
+  .program li{font-size:9pt;line-height:1.65;color:var(--navy-soft);font-weight:300;}
+
+  #page2 .panel3{
+    padding:0;
+    background-size:cover;
+    background-position:center;
+    color:#fff;
+    justify-content:flex-start;
+  }
+  #page2 .panel3 .overlay{
+    position:absolute;inset:0;
+    background:linear-gradient(180deg, rgba(20,25,35,.15) 0%, rgba(10,14,20,.55) 45%, rgba(6,10,14,.78) 100%);
+  }
+  #page2 .panel3 .content{position:relative;padding:0.42in 0.4in;height:100%;display:flex;flex-direction:column;}
+  #page2 .panel3 .top-rule{border-top:1.5px solid #fff;width:100%;margin-bottom:0.2in;}
+  #page2 .panel3 h2{color:#fff;text-align:center;font-size:23pt;margin-bottom:0.22in;}
+  .testimonial{margin-bottom:0.2in;}
+  .stars{color:#fff;font-size:11pt;letter-spacing:3px;margin-bottom:0.07in;}
+  .testimonial p{color:#f2f0ea;font-size:9pt;line-height:1.6;font-weight:300;}
+  .testimonial .name{
+    font-family:'Cormorant Garamond',serif;font-style:italic;font-size:10.5pt;
+    text-align:right;margin-top:0.07in;color:#fff;font-weight:500;
+  }
+  #page2 .panel3 .bottom-rule{border-top:1.5px solid #fff;margin-top:auto;}
+
+  @media print{
+    body{background:#fff;}
+    .sheet{margin:0;box-shadow:none;page-break-after:always;}
+  }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 : FRONT -->
+<div class="sheet" id="page1">
+  <div class="panel panel1">
+    <div class="photo-wrap">
+      <img class="photo" src="assets/photo-coach-male.jpg" alt="">
+    </div>
+    <h2>Reserve Through<br>Your Concierge</h2>
+    <img class="icon-graphic" src="assets/graphic-private-tennis.png" alt="">
+  </div>
+
+  <div class="panel panel2">
+    <div class="top-rule"></div>
+    <div class="headline">Elite Tennis Coaching<br>for All Levels.</div>
+    <p class="body-copy">Experience world-class tennis instruction at EVC Tennis Academy. Our certified coaches deliver personalized training programs designed to elevate your game, whether you're a beginner or competitive player seeking excellence.</p>
+    <div class="diamond-rule"><span></span></div>
+    <img class="location-graphic" src="assets/graphic-south-beach.png" alt="">
+    <div class="bottom-rule"></div>
+    <img class="photo clinic-photo" src="assets/photo-group-clinic.jpg" alt="">
+  </div>
+
+  <div class="panel panel3">
+    <div class="brand-rule"><hr><span class="brand">EVC TENNIS ACADEMY</span><hr></div>
+    <div class="brand-photo-wrap">
+      <img class="photo brand-photo" src="assets/photo-player-female.jpg" alt="">
+    </div>
+    <div class="headline small">Luxury Tennis<br>Experience</div>
+    <p>Exclusive tennis coaching for<br>hotel guests</p>
+    <div class="spacer"></div>
+    <div class="caption-box">PRIVATE TRANSPORTATION INCLUDED</div>
+    <div class="bottom-rule"></div>
+  </div>
+</div>
+
+<!-- PAGE 2 : BACK -->
+<div class="sheet" id="page2">
+  <div class="panel panel1">
+    <div class="arch-wrap">
+      <img src="assets/photo-group-arch.jpg" alt="">
+    </div>
+    <h2>Excellence Since 2015<br>EVC Tennis Academy</h2>
+    <p>Our USPTA-certified coaches bring decades of professional experience to every session. We cultivate champions through tailored instruction, innovative techniques, and an unwavering commitment to excellence.</p>
+    <div class="spacer"></div>
+    <div class="caption-box">WWW.EVCTENNISACADEMY.COM</div>
+    <div class="bottom-rule"></div>
+  </div>
+
+  <div class="panel panel2">
+    <div class="eyebrow-caps">COACHING PROGRAMS</div>
+    <div class="top-rule"></div>
+
+    <div class="program">
+      <span class="spark">&#10038;</span>
+      <div>
+        <h3>Private Lessons</h3>
+        <ul>
+          <li>One-on-One Coaching</li>
+          <li>Video Analysis</li>
+          <li>Customized Training Plan</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="program">
+      <span class="spark">&#10038;</span>
+      <div>
+        <h3>Group Clinics</h3>
+        <ul>
+          <li>Small Group Sessions</li>
+          <li>Drills &amp; Match Play</li>
+          <li>Strategy Development</li>
+          <li>Flexible Scheduling</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="program">
+      <span class="spark">&#10038;</span>
+      <div>
+        <h3>Hitting Sessions</h3>
+        <ul>
+          <li>Personalized Rally Sessions</li>
+          <li>Practice Matches</li>
+          <li>Technique Refinement</li>
+          <li>Footwork &amp; Conditioning</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel panel3" style="background-image:url('assets/photo-testimonial-bg.jpg');">
+    <div class="overlay"></div>
+    <div class="content">
+      <div class="top-rule"></div>
+      <h2>Player Testimonials</h2>
+
+      <div class="testimonial">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p>Seamless, professional, and truly elevated. From transportation to coaching, the entire experience felt first-class.</p>
+        <div class="name">Sophia Bennett, London</div>
+      </div>
+
+      <div class="testimonial">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p>Outstanding private coaching with a premium level of service. Easily one of the best experiences during my stay in Miami Beach.</p>
+        <div class="name">Daniel Reynolds, New York</div>
+      </div>
+
+      <div class="testimonial">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p>Visiting from New York, this was exactly what I was looking for. Great coaching, easy booking, and such a smooth overall experience.</p>
+        <div class="name">Sophia Martinez, New York</div>
+      </div>
+
+      <div class="bottom-rule"></div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
