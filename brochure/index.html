@@ -3,20 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <title>EVC Tennis Academy — Tri-Fold Brochure</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
+  /* Self-hosted to match the original brochure's exact typefaces:
+     display serif = Cormorant (not Cormorant Garamond - its curled
+     terminals on C/G and open-tail g match the source PDF's glyphs),
+     body/label sans = Jost. Hosted locally so rendering doesn't depend
+     on reaching Google Fonts. */
+  @font-face{font-family:'Cormorant';font-weight:500;font-style:normal;src:url('assets/fonts/Cormorant-500.woff2') format('woff2');}
+  @font-face{font-family:'Cormorant';font-weight:600;font-style:normal;src:url('assets/fonts/Cormorant-600.woff2') format('woff2');}
+  @font-face{font-family:'Cormorant';font-weight:500;font-style:italic;src:url('assets/fonts/Cormorant-500-Italic.woff2') format('woff2');}
+  @font-face{font-family:'Jost';font-weight:300;font-style:normal;src:url('assets/fonts/Jost-300.woff2') format('woff2');}
+  @font-face{font-family:'Jost';font-weight:400;font-style:normal;src:url('assets/fonts/Jost-400.woff2') format('woff2');}
+  @font-face{font-family:'Jost';font-weight:500;font-style:normal;src:url('assets/fonts/Jost-500.woff2') format('woff2');}
+
   :root{
     --cream:#EDEAE1;
     --navy:#1E2A44;
     --navy-soft:#2C3A57;
     --gold:#AC8A57;
     --rule:#1E2A44;
+    --serif:'Cormorant',serif;
+    --sans:'Jost',sans-serif;
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;background:#666;}
-  body{font-family:'Jost',sans-serif;color:var(--navy);}
+  body{font-family:var(--sans);color:var(--navy);}
   .sheet{
     width:11in;
     height:8.5in;
@@ -42,15 +53,16 @@
     margin:0.16in 0;
   }
   .rule.thin{border-top-width:1px;}
-  h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:600;margin:0;color:var(--navy);}
+  h1,h2,h3{font-family:var(--serif);font-weight:600;margin:0;color:var(--navy);}
   .headline{
-    font-size:30pt;
-    line-height:1.08;
-    font-weight:600;
+    font-family:var(--serif);
+    font-size:26pt;
+    line-height:1.1;
+    font-weight:500;
   }
-  .headline.small{font-size:24pt;}
+  .headline.small{font-size:22pt;}
   .eyebrow{
-    font-family:'Cormorant Garamond',serif;
+    font-family:var(--serif);
     font-size:15pt;
     letter-spacing:3px;
     text-align:center;
@@ -101,7 +113,7 @@
   #page1 .panel3{align-items:stretch;}
   #page1 .panel3 .brand-rule{display:flex;align-items:center;gap:0.12in;}
   #page1 .panel3 .brand-rule hr{flex:1;height:0;margin:0;border:none;border-top:1.5px solid var(--rule);}
-  #page1 .panel3 .brand{font-size:15pt;letter-spacing:3px;white-space:nowrap;}
+  #page1 .panel3 .brand{font-family:var(--serif);font-size:15pt;letter-spacing:3px;white-space:nowrap;}
   #page1 .panel3 .brand-photo-wrap{margin-top:0.2in;border-top:1.5px solid var(--rule);border-bottom:1.5px solid var(--rule);padding:0.16in 0;}
   #page1 .panel3 .brand-photo{height:3.1in;}
   #page1 .panel3 .headline{margin-top:0.24in;}
@@ -128,13 +140,13 @@
   #page2 .panel1 .bottom-rule{border-top:1.5px solid var(--rule);margin-top:0.16in;}
 
   #page2 .panel2 .eyebrow-caps{
-    font-family:'Cormorant Garamond',serif;
+    font-family:var(--serif);
     font-size:20pt;letter-spacing:3px;font-weight:600;
   }
   #page2 .panel2 .top-rule{border-top:2px solid var(--rule);width:100%;margin:0.14in 0 0.3in;}
   .program{display:flex;gap:0.14in;margin-bottom:0.28in;align-items:flex-start;}
   .program .spark{font-size:14pt;color:var(--navy);margin-top:2px;}
-  .program h3{font-family:'Cormorant Garamond',serif;font-size:16pt;font-weight:600;margin-bottom:0.09in;}
+  .program h3{font-family:var(--serif);font-size:16pt;font-weight:600;margin-bottom:0.09in;}
   .program ul{list-style:none;margin:0;padding:0;}
   .program li{font-size:9pt;line-height:1.65;color:var(--navy-soft);font-weight:300;}
 
@@ -156,7 +168,7 @@
   .stars{color:#fff;font-size:11pt;letter-spacing:3px;margin-bottom:0.07in;}
   .testimonial p{color:#f2f0ea;font-size:9pt;line-height:1.6;font-weight:300;}
   .testimonial .name{
-    font-family:'Cormorant Garamond',serif;font-style:italic;font-size:10.5pt;
+    font-family:var(--serif);font-style:italic;font-size:10.5pt;
     text-align:right;margin-top:0.07in;color:#fff;font-weight:500;
   }
   #page2 .panel3 .bottom-rule{border-top:1.5px solid #fff;margin-top:auto;}
