@@ -560,10 +560,55 @@ h1, h2, h3, h4 { font-family: "Archivo", system-ui, sans-serif; margin: 0; }
 }
 .mock-flow-connector { width: 2px; height: 22px; background: var(--color-accent-300); margin-left: 27px; }
 
+/* — photography (selective real-world images; complements the digital visuals above, never replaces them) — */
+.hero-visual-photo {
+  position: absolute; width: 116px; height: 148px; z-index: 4;
+  border: 1px solid var(--border-strong); box-shadow: var(--shadow-lg); background: var(--surface);
+  overflow: hidden;
+}
+.hero-visual-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.section-photo-accent {
+  position: absolute; width: 180px; height: 230px; z-index: 2;
+  border: 1px solid var(--border-strong); box-shadow: var(--shadow-lg); overflow: hidden; background: var(--surface);
+}
+.section-photo-accent img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.spotlight-photo-accent {
+  width: 100%; max-width: 200px; aspect-ratio: 4 / 5; overflow: hidden;
+  border: 1px solid var(--border-dark); box-shadow: var(--shadow-lg); align-self: flex-end;
+}
+.spotlight-photo-accent img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.section-dark.has-photo {
+  background-image:
+    linear-gradient(135deg, color-mix(in srgb, var(--ink) 92%, transparent) 0%, color-mix(in srgb, var(--color-accent-900) 85%, transparent) 130%),
+    var(--section-photo);
+  background-size: cover; background-position: center;
+}
+
+.photo-feature-media {
+  width: 100%; aspect-ratio: 21 / 9; overflow: hidden;
+  border: 1px solid var(--border-strong); box-shadow: var(--shadow-lg);
+}
+.photo-feature-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.photo-feature-caption { margin-top: 22px; font-size: 14.5px; line-height: 1.6; color: var(--text-muted); max-width: 60ch; }
+
+.service-hero-photo {
+  position: absolute; width: 150px; height: 190px; z-index: 3;
+  border: 1px solid var(--border-strong); box-shadow: var(--shadow-lg); overflow: hidden; background: var(--surface);
+}
+.service-hero-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
 @media (max-width: 780px) {
   .mock-stack { min-height: 320px; }
   .mock-card { max-width: 280px; }
   .hero::before, .hero::after, .mock-glow { opacity: 0.4; }
+  .section-photo-accent { display: none; }
+}
+
+@media (max-width: 480px) {
+  .hero-visual-photo, .service-hero-photo { display: none; }
 }
 
 @media (max-width: 620px) {
