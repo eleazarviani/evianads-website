@@ -380,6 +380,192 @@ h1, h2, h3, h4 { font-family: "Archivo", system-ui, sans-serif; margin: 0; }
 .simple-shell h1 { font-size: 36px; font-weight: 700; letter-spacing: -0.03em; margin: 20px 0 16px; }
 .simple-shell .lede { font-size: 16.5px; line-height: 1.6; color: var(--text-body-2); margin: 0 0 40px; }
 
+/* ══════════════════════════════════════════════════════════════════════
+   Art direction upgrade — background rhythm, digital-visual mockups,
+   controlled motion. Extends the flat/hairline system above; nothing
+   above is removed, only overridden with more specific rules.
+   ══════════════════════════════════════════════════════════════════ */
+
+:root {
+  --color-teal: #1c6f6a; /* one controlled complementary accent — mockups only, never UI/buttons */
+  --gradient-dark: linear-gradient(135deg, var(--ink) 0%, var(--color-accent-900) 130%);
+}
+
+/* — motion (guarded by reduced-motion) — */
+@keyframes ev-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+[data-reveal] { opacity: 0; transform: translateY(22px); transition: opacity 0.6s ease, transform 0.6s ease; }
+[data-reveal].is-visible { opacity: 1; transform: translateY(0); }
+.mock-float { animation: ev-float 5s ease-in-out infinite; }
+.mock-float-slow { animation: ev-float 7s ease-in-out infinite; animation-delay: 0.6s; }
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] { opacity: 1; transform: none; transition: none; }
+  .mock-float, .mock-float-slow { animation: none !important; }
+}
+
+/* — hero: soft gradient glow instead of flat bg — */
+.hero { position: relative; overflow: hidden; }
+.hero::before {
+  content: ""; position: absolute; top: -220px; right: -180px; width: 640px; height: 640px;
+  background: radial-gradient(circle, var(--color-accent-200) 0%, transparent 68%);
+  opacity: 0.7; pointer-events: none; z-index: 0;
+}
+.hero::after {
+  content: ""; position: absolute; bottom: -260px; left: -220px; width: 520px; height: 520px;
+  background: radial-gradient(circle, var(--surface-alt) 0%, transparent 70%);
+  opacity: 0.9; pointer-events: none; z-index: 0;
+}
+.hero .wrap { position: relative; z-index: 1; }
+
+/* — section tint: alternates the page away from one continuous white canvas — */
+.section-tint { background: linear-gradient(180deg, var(--color-accent-100) 0%, var(--surface-alt) 100%); }
+.section-tint .wrap { padding-top: 100px; padding-bottom: 100px; }
+
+/* — dark sections: gradient + soft glow + faint texture instead of flat ink — */
+.section-dark { position: relative; overflow: hidden; background: var(--gradient-dark); }
+.section-dark::before {
+  content: ""; position: absolute; top: -160px; right: -120px; width: 480px; height: 480px;
+  background: radial-gradient(circle, color-mix(in srgb, var(--color-accent-500) 35%, transparent) 0%, transparent 70%);
+  pointer-events: none;
+}
+.section-dark::after {
+  content: ""; position: absolute; inset: 0;
+  background-image: linear-gradient(135deg, transparent 48%, color-mix(in srgb, #fff 4%, transparent) 49%, transparent 51%);
+  background-size: 64px 64px; opacity: 0.4; pointer-events: none;
+}
+.section-dark .wrap { position: relative; z-index: 1; }
+
+/* — feature-split spotlight modifier (Google Ads homepage section) — */
+.feature-split.is-spotlight { background: var(--gradient-dark); border-top: none; border-bottom: none; position: relative; overflow: hidden; }
+.feature-split.is-spotlight::before {
+  content: ""; position: absolute; top: -140px; left: -100px; width: 420px; height: 420px;
+  background: radial-gradient(circle, color-mix(in srgb, var(--color-accent-500) 30%, transparent) 0%, transparent 70%);
+  pointer-events: none;
+}
+.feature-split.is-spotlight .wrap { position: relative; z-index: 1; }
+.feature-split.is-spotlight .eyebrow-label { color: var(--color-accent-400); }
+.feature-split.is-spotlight .eyebrow-dot { background: var(--color-accent-400); }
+.feature-split.is-spotlight h2 { color: var(--on-dark); }
+.feature-split.is-spotlight p { color: var(--on-dark-muted); }
+.feature-split.is-spotlight .feature-split-visual { background: var(--surface); border-color: transparent; box-shadow: var(--shadow-lg); }
+.feature-split.is-spotlight .feature-split-visual-label { color: var(--text-muted-2); }
+
+/* — hairline grids, richened: shadowed/tinted cards with hover lift, replacing flat hairline dividers — */
+.grid-3, .feature-grid { background: transparent; border: none; gap: 20px; }
+.grid-3 > .card, .service-feature {
+  border: 1px solid var(--border-strong); background: var(--surface-alt);
+  box-shadow: var(--shadow-sm); transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.2s ease;
+}
+.grid-3 > .card:hover, .service-feature:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); background: var(--surface); }
+.grid-3 > .card:not(:last-child)::after { background: transparent; }
+.service-feature.is-featured { background: var(--color-accent-100); }
+.service-feature.is-featured:hover { background: var(--color-accent-200); }
+.service-feature:nth-child(3n+3):not(.is-featured) { background: var(--surface); }
+.service-feature::before { height: 4px; }
+.service-feature:hover .icon-badge { background: var(--color-accent); color: #fff; }
+
+/* — category-flow: each of the 3 outcomes gets its own visual identity — */
+.category-flow .grid-3 > .card:nth-child(1) { background: var(--color-accent-100); }
+.category-flow .grid-3 > .card:nth-child(2) { background: var(--surface); }
+.category-flow .grid-3 > .card:nth-child(3) { background: var(--ink); color: var(--on-dark); border-color: var(--border-dark); }
+.category-flow .grid-3 > .card:nth-child(3):hover { background: var(--ink-darker); }
+.category-flow .grid-3 > .card:nth-child(3) h3,
+.category-flow .grid-3 > .card:nth-child(3) .card-num-lg { color: var(--on-dark); }
+.category-flow .grid-3 > .card:nth-child(3) p,
+.category-flow .grid-3 > .card:nth-child(3) .card-list li a { color: var(--on-dark-muted); }
+.category-flow .grid-3 > .card:nth-child(3) .card-list { border-color: var(--border-dark); }
+.category-flow .grid-3 > .card:nth-child(3) .card-list li a:hover { color: var(--on-dark); }
+.category-flow .grid-3 > .card:nth-child(3) .icon-badge { background: color-mix(in srgb, #fff 12%, transparent); color: var(--on-dark); }
+.category-flow .grid-3 > .card:not(:last-child)::after { color: var(--color-accent-700); font-size: 20px; }
+
+/* — icon badges: filled with accent tint, more color, less outline-only — */
+.icon-badge { background: var(--color-accent-100); border-color: transparent; color: var(--color-accent-700); }
+.icon-badge.on-dark { background: color-mix(in srgb, #fff 10%, transparent); color: var(--on-dark); border-color: transparent; }
+
+/* — callout: subtle accent-tinted gradient instead of flat surface-alt — */
+.callout { background: linear-gradient(160deg, var(--color-accent-100) 0%, var(--surface) 65%); box-shadow: var(--shadow-sm); border-color: var(--border-strong); }
+
+/* — process: faint connecting line above the steps on wide screens — */
+.process-grid { position: relative; }
+.process-grid::before {
+  content: ""; position: absolute; top: -22px; left: 0; right: 0; height: 2px; display: none;
+  background-image: repeating-linear-gradient(90deg, var(--color-accent-300) 0 10px, transparent 10px 20px);
+}
+@media (min-width: 780px) { .process-grid::before { display: block; } }
+
+/* — digital-visual mockups: hero stack + per-service hero visuals (no stock imagery, hand-built) — */
+.hero-visual { align-self: stretch; padding: 8px 0 40px; }
+.hero-visual-caption { margin-top: 20px; font-size: 13.5px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted-2); }
+.service-hero-visual { align-self: stretch; padding: 8px 0 40px; position: relative; min-height: 300px; }
+.mock-glow {
+  position: absolute; inset: -40px; z-index: 0;
+  background: radial-gradient(circle at 60% 30%, color-mix(in srgb, var(--color-accent-500) 22%, transparent) 0%, transparent 65%);
+  pointer-events: none;
+}
+.mock-stack { position: relative; z-index: 1; min-height: 370px; }
+.mock-card {
+  position: relative; width: 100%; max-width: 340px; background: var(--surface);
+  border: 1px solid var(--border-strong); box-shadow: var(--shadow-lg); padding: 18px 20px;
+}
+.mock-stack .mock-card { position: absolute; }
+.mock-browser-bar { display: flex; align-items: center; gap: 6px; margin-bottom: 14px; }
+.mock-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--border-strong); flex: none; }
+.mock-url { margin-left: 8px; font-size: 11px; color: var(--text-faint); background: var(--surface-alt); padding: 3px 10px; flex: 1; }
+.mock-line { height: 8px; background: var(--border); margin-bottom: 8px; }
+.mock-line.w-70 { width: 70%; } .mock-line.w-90 { width: 90%; } .mock-line.w-50 { width: 50%; } .mock-line.w-40 { width: 40%; }
+.mock-title-line { height: 12px; background: var(--ink); opacity: 0.85; width: 62%; margin-bottom: 10px; }
+.mock-tag {
+  display: inline-flex; align-items: center; font-size: 10px; font-weight: 700; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--color-accent-700); background: var(--color-accent-100);
+  padding: 3px 8px; margin-bottom: 10px;
+}
+.mock-sparkline { display: block; margin-top: 12px; overflow: visible; }
+.mock-sparkline path { fill: none; stroke: var(--color-accent-500); stroke-width: 2; }
+.mock-sparkline circle { fill: var(--color-accent-600); }
+.mock-status-pill {
+  display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700;
+  letter-spacing: 0.04em; text-transform: uppercase; padding: 4px 10px;
+}
+.mock-status-pill.is-new { background: var(--surface-alt); color: var(--text-muted); }
+.mock-status-pill.is-booked { background: var(--color-accent-100); color: var(--color-accent-700); }
+.mock-status-pill.is-booked::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--color-accent-600); }
+.mock-arrow-sep { text-align: center; color: var(--text-faint); font-size: 13px; margin: 8px 0; }
+.mock-rank-row { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); }
+.mock-rank-row:last-child { border-bottom: none; }
+.mock-rank-badge {
+  width: 26px; height: 26px; flex: none; display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700; border: 1px solid var(--border-strong); color: var(--text-muted);
+}
+.mock-rank-body { flex: 1; min-width: 0; }
+.mock-rank-row.is-you { background: var(--color-accent-100); margin: 0 -14px; padding: 10px 14px; }
+.mock-rank-row.is-you .mock-rank-badge { background: var(--color-accent); color: #fff; border-color: var(--color-accent); }
+.mock-chat-bubble { background: var(--surface-alt); border: 1px solid var(--border); padding: 18px 20px; }
+.mock-sparkle { color: var(--color-teal); }
+.mock-cite { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; color: var(--color-teal); margin-top: 12px; }
+.mock-frame-browser .mock-frame-body { padding: 16px; display: grid; gap: 8px; }
+.mock-frame-phone {
+  position: absolute; width: 108px; border: 6px solid var(--ink); border-radius: 14px; background: var(--surface);
+  box-shadow: var(--shadow-lg); overflow: hidden; z-index: 2;
+}
+.mock-frame-phone .mock-frame-body { padding: 10px; display: grid; gap: 6px; }
+.mock-listing-row { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border); }
+.mock-listing-row:last-child { border-bottom: none; }
+.mock-pin { width: 30px; height: 30px; flex: none; display: flex; align-items: center; justify-content: center; background: var(--color-accent-100); color: var(--color-accent-700); }
+.mock-stars { color: var(--color-accent-500); font-size: 12px; letter-spacing: 1px; }
+.mock-envelope-row { display: flex; align-items: center; gap: 14px; }
+.mock-envelope { width: 42px; height: 32px; flex: none; border: 1.5px solid var(--border-strong); position: relative; background: var(--surface); }
+.mock-envelope::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 16px; border-bottom: 1.5px solid var(--border-strong); clip-path: polygon(0 0, 50% 100%, 100% 0); }
+.mock-flow-node {
+  display: flex; align-items: center; gap: 10px; padding: 12px 16px; background: var(--surface);
+  border: 1px solid var(--border-strong); box-shadow: var(--shadow-sm); font-size: 13.5px; font-weight: 600;
+}
+.mock-flow-connector { width: 2px; height: 22px; background: var(--color-accent-300); margin-left: 27px; }
+
+@media (max-width: 780px) {
+  .mock-stack { min-height: 320px; }
+  .mock-card { max-width: 280px; }
+  .hero::before, .hero::after, .mock-glow { opacity: 0.4; }
+}
+
 @media (max-width: 620px) {
   .wrap, .section, .split-section, .simple-shell { padding-left: 20px; padding-right: 20px; }
   .hero h1 { font-size: 40px; }
@@ -388,4 +574,6 @@ h1, h2, h3, h4 { font-family: "Archivo", system-ui, sans-serif; margin: 0; }
   .cta-band h2 { font-size: 30px; }
   .site-footer .wrap { flex-direction: column; }
   .footer-meta { align-items: flex-start; text-align: left; }
+  .section-tint .wrap { padding-top: 64px; padding-bottom: 64px; }
+  .mock-float, .mock-float-slow { animation: none; }
 }

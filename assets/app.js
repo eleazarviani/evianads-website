@@ -1,3 +1,19 @@
+// Scroll-reveal — fades/rises elements marked [data-reveal] into view.
+// Skips entirely for prefers-reduced-motion (CSS already shows them fully visible).
+if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+  document.querySelectorAll('[data-reveal]').forEach((el) => revealObserver.observe(el));
+} else {
+  document.querySelectorAll('[data-reveal]').forEach((el) => el.classList.add('is-visible'));
+}
+
 // Mobile nav toggle.
 const navToggle = document.querySelector('.nav-toggle');
 const siteHeaderEl = document.querySelector('.site-header');
