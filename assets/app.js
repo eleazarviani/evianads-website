@@ -1,3 +1,28 @@
+// Mobile nav toggle.
+const navToggle = document.querySelector('.nav-toggle');
+const siteHeaderEl = document.querySelector('.site-header');
+if (navToggle && siteHeaderEl) {
+  navToggle.addEventListener('click', () => {
+    const isOpen = siteHeaderEl.classList.toggle('nav-open');
+    navToggle.setAttribute('aria-expanded', String(isOpen));
+  });
+}
+
+// "Services" nav dropdown — click to toggle (works for touch and desktop),
+// closes on an outside click.
+document.querySelectorAll('.nav-dropdown-toggle').forEach((toggle) => {
+  toggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const item = toggle.closest('.nav-item-dropdown');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.nav-item-dropdown.open').forEach((el) => el.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+});
+document.addEventListener('click', () => {
+  document.querySelectorAll('.nav-item-dropdown.open').forEach((el) => el.classList.remove('open'));
+});
+
 // FAQ accordion — one open item at a time.
 document.querySelectorAll('.faq-item').forEach((item) => {
   const btn = item.querySelector('.faq-q');
@@ -51,9 +76,9 @@ if (contactForm) {
           name,
           email,
           website: contactForm.elements.site.value.trim(),
-          monthly_ad_spend: contactForm.elements.spend.value,
+          interested_in: contactForm.elements.interest.value,
           message: contactForm.elements.message.value.trim(),
-          _subject: 'New lead — Evianads free audit request',
+          _subject: 'New lead — Evianads consultation request',
           _template: 'table',
         }),
       });
