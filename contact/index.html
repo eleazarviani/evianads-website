@@ -84,32 +84,49 @@
         <p class="confirm-body">I'll reply to <span id="confirm-email">your inbox</span> within one working day with next steps.</p>
       </div>
 
-      <form id="contact-form" class="form-grid">
+      <form id="contact-form" class="form-grid" data-hs-portal-id="REPLACE_PORTAL_ID" data-hs-form-guid="REPLACE_FORM_GUID">
         <div class="form-row-2">
           <label class="field">
-            <span class="field-label">Name</span>
-            <input type="text" name="name" required>
+            <span class="field-label">First name</span>
+            <input type="text" name="firstname" autocomplete="given-name" required>
           </label>
           <label class="field">
+            <span class="field-label">Last name</span>
+            <input type="text" name="lastname" autocomplete="family-name" required>
+          </label>
+        </div>
+        <div class="form-row-2">
+          <label class="field">
             <span class="field-label">Work email</span>
-            <input type="email" name="email" required>
+            <input type="email" name="email" autocomplete="email" required>
+          </label>
+          <label class="field">
+            <span class="field-label">Phone</span>
+            <input type="tel" name="phone" autocomplete="tel">
+          </label>
+        </div>
+        <div class="form-row-2">
+          <label class="field">
+            <span class="field-label">Business name</span>
+            <input type="text" name="company" autocomplete="organization">
+          </label>
+          <label class="field">
+            <span class="field-label">Website</span>
+            <input type="text" name="site" placeholder="yourdomain.com" autocomplete="url">
           </label>
         </div>
         <label class="field">
-          <span class="field-label">Website</span>
-          <input type="text" name="site" placeholder="yourdomain.com">
-        </label>
-        <label class="field">
           <span class="field-label">What are you interested in?</span>
           <select name="interest">
-            <option>Not sure yet — help me figure it out</option>
-            <option>Google Ads Management</option>
-            <option>SEO</option>
-            <option>AI Search Visibility</option>
-            <option>Website Design &amp; Development</option>
-            <option>Google Business Profile &amp; Local SEO</option>
-            <option>Email Marketing &amp; Lead Generation</option>
-            <option>Lead Automation &amp; Business Communications</option>
+            <option value="Not Sure">Not sure yet — help me figure it out</option>
+            <option value="Google Ads">Google Ads Management</option>
+            <option value="SEO">SEO</option>
+            <option value="AI Search Visibility">AI Search Visibility</option>
+            <option value="Web Design">Website Design &amp; Development</option>
+            <option value="Google Business Profile">Google Business Profile &amp; Local SEO</option>
+            <option value="Email Marketing">Email Marketing &amp; Lead Generation</option>
+            <option value="Lead Automation">Lead Automation &amp; Business Communications</option>
+            <option value="Multiple Services">More than one of these</option>
           </select>
         </label>
         <label class="field">
@@ -119,7 +136,7 @@
         <input type="text" name="_honey" class="hidden" tabindex="-1" autocomplete="off">
         <p class="form-error" id="contact-error"></p>
         <button type="submit" class="btn btn-dark-lg" style="justify-self: start;">Get My Free Consultation</button>
-        <p class="form-note">Your details are used to reply to this enquiry and nothing else. No list, no sequence, no sharing.</p>
+        <p class="form-note">Your details are used to reply to this enquiry and nothing else. No list, no sequence, no sharing. See the <a href="/privacy/">Privacy Policy</a>.</p>
       </form>
     </div>
   </div>
@@ -134,6 +151,7 @@
         <a href="/#services">Services</a>
         <a href="/about/">About</a>
         <a href="/contact/">Contact</a>
+        <a href="/privacy/">Privacy</a>
       </nav>
     </div>
     <div class="footer-meta">
@@ -143,6 +161,7 @@
   </div>
 </footer>
 
+<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/REPLACE_PORTAL_ID.js"></script>
 <script src="/assets/app.js"></script>
 </body>
 </html>
