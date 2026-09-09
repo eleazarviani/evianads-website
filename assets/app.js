@@ -152,11 +152,6 @@ const HUBSPOT_FIELDS = [
   'first_touch_at',
 ];
 
-function readCookie(name) {
-  const match = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
-  return match ? decodeURIComponent(match[1]) : '';
-}
-
 function getFirstTouch() {
   try {
     return JSON.parse(localStorage.getItem('ev_first_touch') || 'null') || {};
@@ -250,19 +245,17 @@ if (contactForm) {
           .map((name) => ({ name, value: lead[name] }))
           .filter((f) => f.value !== undefined && f.value !== null && f.value !== '');
 
+        // No context block: this portal/form silently drops every custom
+        // property (while still returning 200) when a context object is
+        // present, with or without hutk — confirmed via isolated fetch tests
+        // against the live form. Omitting context entirely, every field
+        // lands correctly, including the custom attribution properties.
         const res = await fetch(
           `https://api.hsforms.com/submissions/v3/integration/submit/${hsPortalId}/${hsFormGuid}`,
           {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              fields,
-              context: {
-                hutk: readCookie('hubspotutk') || undefined,
-                pageUri: location.href,
-                pageName: document.title,
-              },
-            }),
+            body: JSON.stringify({ fields }),
           }
         );
         if (!res.ok) throw new Error(`HubSpot responded ${res.status}`);
