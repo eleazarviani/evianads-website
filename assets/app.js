@@ -146,7 +146,7 @@ const LEAD_EMAIL = 'consult@evianads.com';
 // never send it, full stop, until an append mechanism is confirmed.
 const HUBSPOT_FIELDS = [
   'firstname', 'lastname', 'company', 'email', 'phone', 'website',
-  'primary_service_interest', 'message', 'first_touch_service',
+  'primary_service_interest', 'message', 'firsttouch_service',
   'lead_source_detail', 'landing_domain', 'landing_page', 'referrer',
   'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'gclid',
   'first_touch_at',
@@ -224,7 +224,7 @@ if (contactForm) {
       website,
       primary_service_interest: primaryServiceInterest,
       message,
-      first_touch_service: firstTouch.service || 'EVI — Not Sure',
+      firsttouch_service: firstTouch.service || 'EVI — Not Sure',
       lead_source_detail: firstTouch.source || 'Other',
       landing_domain: location.hostname,
       landing_page: firstTouch.landing_page || location.pathname,
