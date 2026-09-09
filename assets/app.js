@@ -7,14 +7,18 @@
   const STORAGE_KEY = 'ev_first_touch';
   const MAX_AGE_MS = 90 * 24 * 60 * 60 * 1000;
 
+  // Brand-prefixed to match the shared, multi-business `primary_service_interest`
+  // / `first_touch_service` HubSpot properties (one property, many brands —
+  // VPC's and EVC's own `VPC — …` / `EVC — …` options get appended to the same
+  // list later, not a separate property per brand).
   const SERVICE_BY_PATH = {
-    '/google-ads/': 'Google Ads',
-    '/seo/': 'SEO',
-    '/ai-search-visibility/': 'AI Search Visibility',
-    '/web-design/': 'Web Design',
-    '/google-business-profile/': 'Google Business Profile',
-    '/email-marketing/': 'Email Marketing',
-    '/lead-automation/': 'Lead Automation',
+    '/google-ads/': 'EVI — Google Ads',
+    '/seo/': 'EVI — SEO',
+    '/ai-search-visibility/': 'EVI — AI Search Visibility',
+    '/web-design/': 'EVI — Web Design',
+    '/google-business-profile/': 'EVI — Google Business Profile',
+    '/email-marketing/': 'EVI — Email Marketing',
+    '/lead-automation/': 'EVI — Lead Automation',
   };
 
   function deriveSource(utm, gclid, referrer) {
@@ -135,11 +139,17 @@ const LEAD_EMAIL = 'consult@evianads.com';
 // Every one of these must exist as a field on the HubSpot form referenced by
 // data-hs-form-guid below — HubSpot's Forms API rejects fields the form
 // wasn't configured to accept. See the setup notes for the exact list.
+// businesses_engaged_with is deliberately NOT in this list: HubSpot has no
+// verified "append, don't overwrite" behavior for that checkbox property via
+// the Forms API, and this site has no authenticated read access to check
+// whether a contact already has other brands set before submitting — so we
+// never send it, full stop, until an append mechanism is confirmed.
 const HUBSPOT_FIELDS = [
   'firstname', 'lastname', 'company', 'email', 'phone', 'website',
   'primary_service_interest', 'message', 'first_touch_service',
-  'lead_source_detail', 'landing_page', 'referrer',
+  'lead_source_detail', 'landing_domain', 'landing_page', 'referrer',
   'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'gclid',
+  'first_touch_at',
 ];
 
 function readCookie(name) {
@@ -214,8 +224,9 @@ if (contactForm) {
       website,
       primary_service_interest: primaryServiceInterest,
       message,
-      first_touch_service: firstTouch.service || 'Not Sure',
+      first_touch_service: firstTouch.service || 'EVI — Not Sure',
       lead_source_detail: firstTouch.source || 'Other',
+      landing_domain: location.hostname,
       landing_page: firstTouch.landing_page || location.pathname,
       referrer: firstTouch.referrer || '',
       utm_source: firstTouch.utm_source || '',
@@ -224,6 +235,7 @@ if (contactForm) {
       utm_content: firstTouch.utm_content || '',
       utm_term: firstTouch.utm_term || '',
       gclid: firstTouch.gclid || '',
+      first_touch_at: firstTouch.first_touch_at ? new Date(firstTouch.first_touch_at).toISOString() : '',
       submitted_at: new Date().toISOString(),
     };
 
