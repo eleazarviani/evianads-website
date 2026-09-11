@@ -19,6 +19,7 @@
     '/google-business-profile/': 'EVI — Google Business Profile',
     '/email-marketing/': 'EVI — Email Marketing',
     '/lead-automation/': 'EVI — Lead Automation',
+    '/chatgpt-ads/': 'EVI — ChatGPT Ads',
   };
 
   function deriveSource(utm, gclid, referrer) {
